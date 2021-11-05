@@ -24,13 +24,11 @@ MAC_ADDR = os.getenv("MAC_ADDR")
 AUTH_KEY = bytes.fromhex(AUTH_KEY)
 alternate = True
 
-authenticator = IAMAuthenticator("afBBG7rhrWfXVWsQ7AFqGuTm5fRM0p8bS-FmBvf_Z2Cv")
+authenticator = IAMAuthenticator(API_KEY)
 
 client = CloudantV1(authenticator=authenticator)
 
-client.set_service_url(
-    "https://dbb024f3-9e7d-44fd-b99c-cbcdb456cc83-bluemix.cloudantnosqldb.appdomain.cloud"
-)
+client.set_service_url(SERVICE_URL)
 
 
 def general_info():
