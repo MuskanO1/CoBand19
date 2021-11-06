@@ -68,32 +68,48 @@
 
         function requestData() {
             // Ajax call to get the Data from Flask
-            var requests = $.get('/data');
+            try {
+                var requests = $.get('/data');
 
+                var tm = requests.done(function (result) {
+                    var series = chart.series[0],
+                        shift = series.data.length > 20;
 
-            var tm = requests.done(function (result) {
-                var series = chart.series[0],
-                    shift = series.data.length > 20;
+                    // add the point
+                    chart.series[0].addPoint(result, true, shift);
+                    console.log(result);
+                    if (result[1] > 120) {
+                        // alert("WTF?")
+                        console.log("Dard")
+                        Highcharts.setOptions({
+                            series: {
+                                lineColor: "#1d82b8"
+                            }
+                        });
 
-                // add the point
-                chart.series[0].addPoint(result, true, shift);
+                    }
+                    // call it again after few seconds
+                    setTimeout(requestData, 4000);
 
-                // call it again after one second
-                setTimeout(requestData, 2000);
-            });
+                });
+            }
+            catch (error) {
+                console.log(error);
+                console.log("Ran out of data, will try calling again")
+                setTimeout(requestData, 4000);
+            }
         }
-
         $(document).ready(function () {
             chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'data-container',
-                    defaultSeriesType: 'spline',
+                    defaultSeriesType: 'spline', // change the type to spline, line, area
                     events: {
                         load: requestData
                     }
                 },
                 title: {
-                    text: 'Live random data'
+                    text: 'Live HeartRate data'
                 },
                 xAxis: {
                     type: 'datetime',
@@ -108,9 +124,25 @@
                         margin: 80
                     }
                 },
+                plotOptions: {
+                    series: {
+                        threshold: 0
+                    }
+                },
+
                 series: [{
-                    name: 'Random data',
-                    data: []
+                    name: 'HeartRate data',
+                    data: [],
+                    zones: [{
+                        value: 60,
+                        color: '#7cb5ec'
+                    }, {
+                        value: 115,
+                        color: '#86f77e'
+                    }, {
+                        color: '#FC8F78'
+                    }]
+
                 }]
             });
 
