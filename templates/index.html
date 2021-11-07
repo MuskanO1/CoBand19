@@ -49,6 +49,7 @@
     </style>
     <img src="main_icon.png" alt="Icon">
 
+
     <div class="jumbotron" style="background-color: #889EEA ; text-align:center">
     </div>
     <div class="container-fluid">
@@ -60,6 +61,15 @@
         </div>
     </div>
 
+    <div class="col-5 jumbotron p-2 mx-1">
+        <h1 class="mb3"> Sensor : </h1>
+    </div>
+    <br>
+
+    <div class="col-5 jumbotron p-2 mx-1">
+        <h1 class="mb4">Sensor :</h1>
+    </div>
+    <br>
 
 
     <script>
@@ -81,21 +91,36 @@
                 var tm = requests.done(function (result) {
                     var series = chart.series[0],
                         shift = series.data.length > 20;
+                    var series1 = chart.series[1],
+                        shift1 = series1.data.length > 20;
 
                     // add the point
-                    console.log(result["mb3"]);
-                    chart.series[0].addPoint(result["mb4"], true, shift);
-                    chart.series[1].addPoint(result["mb3"], true, shift);
-                    console.log(result);
-                    if (result[1] > 120) {
-                        // alert("WTF?")
-                        console.log("Dard")
-                        Highcharts.setOptions({
-                            series: {
-                                lineColor: "#1d82b8"
-                            }
-                        });
-
+                    try {
+                        console.log(result["mb3"]);
+                        chart.series[0].addPoint(result["mb3"], true, shift);
+                        $(".mb3").text("Harsh's Heart Rate is : " + Math.round(result["mb3"][1]))
+                        if (result["mb3"][1] > 110) {
+                            $(".mb3").css("color", "red");
+                        } else {
+                            $(".mb3").css("color", "black");
+                        }
+                    }
+                    catch (error) {
+                        console.log(error);
+                        console.log("Ran out of data for mb3");
+                    }
+                    try {
+                        chart.series[1].addPoint(result["mb4"], true, shift1);
+                        $(".mb4").text("Jatin's Heart Rate is : " + Math.round(result["mb4"][1]));
+                        if (result["mb4"][1] > 110) {
+                            $(".mb4").css("color", "red");
+                        } else {
+                            $(".mb4").css("color", "black");
+                        }
+                    }
+                    catch (error) {
+                        console.log(error);
+                        console.log("Ran out of data for mb4");
                     }
                     // call it again after few seconds
                     setTimeout(requestData, 4000);
@@ -140,7 +165,7 @@
                 },
 
                 series: [{
-                    name: 'mb4',
+                    name: 'mb3',
                     data: [],
                     zones: [{
                         value: 60,
@@ -155,7 +180,7 @@
 
                 },
                 {
-                    name: 'mb3',
+                    name: 'mb4',
                     data: [],
                     zones: [{
                         value: 60,
