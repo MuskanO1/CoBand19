@@ -59,7 +59,7 @@ def get_new_data():
                 data_entry: Document = Document(id=time_)
                 data_entry.value = int(data["Heartrate"][i])
                 create_document_response = client.post_document(
-                    db="testinglol", document=data_entry
+                    db="miband3", document=data_entry
                 ).get_result()
                 print(f"You have created the document:\n{data_entry}")
                 print("Logged the data")

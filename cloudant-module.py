@@ -62,6 +62,7 @@ band = create_connection()
 general_info()
 
 hr_list = {}
+count = 0
 
 
 def get_realtime():
@@ -73,11 +74,11 @@ def get_realtime():
 
 def heart_logger(data):
     data = abs(data)
+    global count
     print("Realtime heart BPM:", data)
     hr_list[datetime.now().strftime("%d/%m/%y %H:%M:%S")] = data
     print(len(hr_list) // 2)
-    global alternate
-    if alternate:
+    if count % 10 == 0:
         time_ = str(datetime.now().strftime("%d/%m/%y %H:%M:%S"))
         data_entry: Document = Document(id=time_)
 
@@ -86,14 +87,14 @@ def heart_logger(data):
 
         # Save the document in the database
         create_document_response = client.post_document(
-            db="coband", document=data_entry
+            db="miband4", document=data_entry
         ).get_result()
 
         print(f"You have created the document:\n{data_entry}")
         print("Logged the data")
     else:
         print("Didnt log the data")
-    alternate = not alternate
+    count += 1
 
 
 get_realtime()
