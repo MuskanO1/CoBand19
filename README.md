@@ -1,3 +1,45 @@
 # CoBAND
-## The POC invovles using the data of a Mi Band-4 (another fitness tracker) to extract information of recorded vital details like heart-rate overtime and plotting graphs indicating their variation for the same ##
- Datavisualisation of the sample dataset of 56586 heart-rate over the course of two years
+
+
+INTRODUCTION
+------------
+
+Pawllar is a product idea developed by team PontiacBandits and following is the prototype of the product dash board web version with following functionalities :
+
+ * Visualise and raise alerts based on heartrate of the students, multiple at once.
+ * Raise alerts for admin to ensure things are in check and protocols are followed properly.
+
+## Technologies
+------------
+Project is created with:
+* Flask
+* IBM Cloudant database Service
+* MiBand4 library to retrieve heartrate information (Works only with linux)
+* JavaScript
+* Highcharts for plotting graph
+	
+## Setup
+------------
+To run this project, install the requirements.txt module using 
+
+For linux or MacOs:
+```
+pip3 install -r requirements.txt
+```
+
+For Windows:
+```
+pip install -r requirements.txt
+```
+
+To run the prototype simulation to get data from cloudant, setup the webpage using :
+
+For linux or MacOs:
+```
+python3 cloudant-flask-app.py
+```
+
+For Windows:
+```
+python3 cloudant-flask-app.py
+```
