@@ -96,31 +96,45 @@
 
                     // add the point
                     try {
-                        console.log(result["mb3"]);
-                        chart.series[0].addPoint(result["mb3"], true, shift);
-                        $(".mb3").text("Harsh's Heart Rate is : " + Math.round(result["mb3"][1]))
-                        if (result["mb3"][1] > 110) {
-                            $(".mb3").css("color", "red");
-                        } else {
-                            $(".mb3").css("color", "black");
+
+
+                        if (typeof result["mb3"] !== 'undefined') {
+                            console.log("result[mb3]", result["mb3"]);
+                            chart.series[0].addPoint(result["mb3"], true, shift);
+                            $(".mb3").text("Harsh's Heart Rate is : " + Math.round(result["mb3"][1]))
+                            if (result["mb3"][1] > 110) {
+                                $(".mb3").css("color", "red");
+                            } else {
+                                $(".mb3").css("color", "black");
+                            }
+                        }
+                        else {
+                            console.log("No Data for mb3")
                         }
                     }
                     catch (error) {
                         console.log(error);
-                        console.log("Ran out of data for mb3");
                     }
                     try {
-                        chart.series[1].addPoint(result["mb4"], true, shift1);
-                        $(".mb4").text("Jatin's Heart Rate is : " + Math.round(result["mb4"][1]));
-                        if (result["mb4"][1] > 110) {
-                            $(".mb4").css("color", "red");
-                        } else {
-                            $(".mb4").css("color", "black");
+
+
+                        if (typeof result["mb4"] !== 'undefined') {
+                            console.log("result[mb4]", result["mb4"]);
+                            chart.series[1].addPoint(result["mb4"], true, shift);
+                            $(".mb4").text("Jatin's Heart Rate is : " + Math.round(result["mb4"][1]))
+                            if (result["mb4"][1] > 110) {
+                                $(".mb4").css("color", "red");
+                            } else {
+                                $(".mb4").css("color", "black");
+                            }
+                        }
+                        else {
+                            console.log("No Data for mb4")
                         }
                     }
                     catch (error) {
                         console.log(error);
-                        console.log("Ran out of data for mb4");
+
                     }
                     // call it again after few seconds
                     setTimeout(requestData, 4000);

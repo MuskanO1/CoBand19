@@ -26,15 +26,29 @@ app = Flask(__name__)
 i = 0
 j = 0
 
+responses_mb3 = service.post_all_docs(
+    db="muskan",
+    include_docs=True,
+).get_result()
+
+responses_mb4 = service.post_all_docs(
+    db="jxtin",
+    include_docs=True,
+).get_result()
+
+
+i = len(responses_mb3["rows"]) - 5
+j = len(responses_mb4["rows"]) - 5
+
 
 def get_data():
     responses_mb3 = service.post_all_docs(
-        db="miband3",
+        db="muskan",
         include_docs=True,
     ).get_result()
 
     responses_mb4 = service.post_all_docs(
-        db="miband4",
+        db="jxtin",
         include_docs=True,
     ).get_result()
     return responses_mb3, responses_mb4

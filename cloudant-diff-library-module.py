@@ -1,12 +1,7 @@
 import time
 from datetime import datetime
-from bluepy.btle import BTLEDisconnectError
-from miband import miband
-import csv
 from ibmcloudant.cloudant_v1 import CloudantV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-import json
-import logging
 import pandas as pd
 from ibm_cloud_sdk_core import ApiException
 from ibmcloudant.cloudant_v1 import CloudantV1, Document
@@ -48,6 +43,7 @@ def get_new_data():
     global hr_list
     data = pd.read_csv("heartrate.csv")
     data.drop_duplicates(subset="At", keep="last", inplace=True)
+    data = data.reset_index(drop=True)
     if i < len(data["At"]):
         try:
             timedate_raw = data["At"][i]
@@ -59,7 +55,7 @@ def get_new_data():
                 data_entry: Document = Document(id=time_)
                 data_entry.value = int(data["Heartrate"][i])
                 create_document_response = client.post_document(
-                    db="miband3", document=data_entry
+                    db="muskan", document=data_entry
                 ).get_result()
                 print(f"You have created the document:\n{data_entry}")
                 print("Logged the data")

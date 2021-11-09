@@ -87,7 +87,7 @@ def heart_logger(data):
 
         # Save the document in the database
         create_document_response = client.post_document(
-            db="miband4", document=data_entry
+            db="jxtin", document=data_entry
         ).get_result()
 
         print(f"You have created the document:\n{data_entry}")
