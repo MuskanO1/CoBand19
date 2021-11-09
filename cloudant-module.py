@@ -8,8 +8,9 @@ from ibmcloudant.cloudant_v1 import CloudantV1, Document
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+# All necessary imports
 
+load_dotenv()
 
 SERVICE_URL = os.getenv("SERVICE_URL")
 API_KEY = os.getenv("API_KEY")
@@ -25,8 +26,10 @@ client = CloudantV1(authenticator=authenticator)
 
 client.set_service_url(SERVICE_URL)
 
+# All private keys loaded from .env file
 
-def general_info():
+
+def general_info():  # Prints general info about the band
     global band
     print("MiBand-4")
     print("Soft revision:", band.get_revision())
@@ -67,13 +70,15 @@ def get_realtime():
         print("\nExit.")
 
 
-def heart_logger(data):
+def heart_logger(data):  # data is the heart rate value
     data = abs(data)
-    global count
-    print("Realtime heart BPM:", data)
-    hr_list[datetime.now().strftime("%d/%m/%y %H:%M:%S")] = data
+    global count  # global variable to count the number of heart rate values
+    print("Realtime heart BPM:", data)  # print the heart rate value
+    hr_list[
+        datetime.now().strftime("%d/%m/%y %H:%M:%S")
+    ] = data  # add the heart rate value to the dictionary
     print(len(hr_list) // 2)
-    if count % 10 == 0:
+    if count % 10 == 0:  # Using every 10th heart rate value to create a new document
         time_ = str(datetime.now().strftime("%d/%m/%y %H:%M:%S"))
         data_entry: Document = Document(id=time_)
 
@@ -85,7 +90,9 @@ def heart_logger(data):
             db="jxtin", document=data_entry
         ).get_result()
 
-        print(f"You have created the document:\n{data_entry}")
+        print(
+            f"You have created the document:\n{data_entry}"
+        )  # print the document that was created
         print("Logged the data")
     else:
         print("Didnt log the data")

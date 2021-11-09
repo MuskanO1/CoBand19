@@ -1,3 +1,6 @@
+"""This file uses matplotlib to plot data from the local csv, obselete after the cloudant integration"""
+
+
 import datetime
 from itertools import count
 import pandas as pd
