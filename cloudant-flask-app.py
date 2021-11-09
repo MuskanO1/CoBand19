@@ -1,13 +1,10 @@
-from flask import Flask, render_template, make_response
-import json
-from time import sleep
-from random import random
-from flask import Flask, render_template, make_response
 import datetime
-from ibmcloudant.cloudant_v1 import CloudantV1
-from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+import json
 import os
 from dotenv import load_dotenv
+from flask import Flask, make_response, render_template
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibmcloudant.cloudant_v1 import CloudantV1
 
 load_dotenv()
 

@@ -1,9 +1,6 @@
-from re import I
-from flask import Flask, render_template, url_for, request, redirect, make_response
-import random
+from flask import Flask, render_template, make_response
 import json
-from time import time, localtime, sleep
-from random import random
+from time import sleep
 from flask import Flask, render_template, make_response
 import pandas as pd
 import datetime
