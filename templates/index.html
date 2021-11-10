@@ -62,13 +62,13 @@
     </div>
 
     <div
-        style="background-color: white ; text-align:center; margin-top: 50px; margin-left: 550px; width: 500px; border-radius: 1000px;">
+        style="background-color: white ; text-align:center; margin-top: 50px; margin-left: 700px; width: 500px; border-radius: 1000px;">
         <h1 class="mb3"> Sensor : </h1>
     </div>
     <br>
 
     <div
-        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 550px; width: 500px; border-radius: 1000px;">
+        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 700px; width: 500px; border-radius: 1000px;">
         <h1 class="mb4">Sensor :</h1>
     </div>
     <br>
@@ -103,7 +103,7 @@
                         if (typeof result["mb3"] !== 'undefined') {
                             console.log("result[mb3]", result["mb3"]);
                             chart.series[0].addPoint(result["mb3"], true, shift);
-                            $(".mb3").text("Harsh's Heart Rate is : " + Math.round(result["mb3"][1]))
+                            $(".mb3").text("Muskan's Heart Rate is : " + Math.round(result["mb3"][1]))
                             if (result["mb3"][1] > 110) {
                                 $(".mb3").css("color", "red");
                             } else {
