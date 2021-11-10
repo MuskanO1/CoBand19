@@ -78,7 +78,7 @@ def heart_logger(data):  # data is the heart rate value
         datetime.now().strftime("%d/%m/%y %H:%M:%S")
     ] = data  # add the heart rate value to the dictionary
     print(len(hr_list) // 2)
-    if count % 10 == 0:  # Using every 10th heart rate value to create a new document
+    if count % 3 == 0:  # Using every 10th heart rate value to create a new document
         time_ = str(datetime.now().strftime("%d/%m/%y %H:%M:%S"))
         data_entry: Document = Document(id=time_)
 

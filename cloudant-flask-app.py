@@ -38,8 +38,8 @@ responses_mb4 = service.post_all_docs(
 ).get_result()
 
 
-i = len(responses_mb3["rows"]) - 5  # To use last 5 documents from mb3 database
-j = len(responses_mb4["rows"]) - 5  # To use last 5 documenrs from mb4 data
+i = len(responses_mb3["rows"]) - 10  # To use last 5 documents from mb3 database
+j = len(responses_mb4["rows"]) - 10  # To use last 5 documenrs from mb4 data
 
 
 def get_data():
