@@ -47,35 +47,43 @@
             height: 25%;
         }
     </style>
-    <img src="https://raw.githubusercontent.com/jxtin/CoBand19/main/templates/main_icon.png" alt="Icon">
+    <img src="https://raw.githubusercontent.com/jxtin/CoBand19/main/v1/templates/main_icon.png" alt="Icon">
     <br>
-    <div
-        style="background-color: white ; text-align:center; margin-top: 50px; margin-left: 700px; width: 500px; border-radius: 1000px;">
-        <h1 class="temp_value0"> Sensor : </h1>
-    </div>
-    <div
-        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 700px; width: 500px; border-radius: 1000px;">
-        <h1 class="temp_value1"> Sensor : </h1>
-    </div>
-    <br>
-    <div
-        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 700px; width: 500px; border-radius: 1000px;">
-        <h1 class="spo2_value0">Sensor :</h1>
-    </div>
-    <div
-        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 700px; width: 500px; border-radius: 1000px;">
-        <h1 class="spo2_value1">Sensor :</h1>
+    <div>
+        <h1 class="temp_value0"
+            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">
+            Sensor : </h1>
+        <h1 class="temp_value1"
+            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">
+            Sensor : </h1>
+        <hr style="clear:both;" />
+
     </div>
     <br>
-    <div
-        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 700px; width: 500px; border-radius: 1000px;">
-        <h1 class="hr_value0">Sensor :</h1>
-    </div>
-    <div
-        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 700px; width: 500px; border-radius: 1000px;">
-        <h1 class="hr_value1">Sensor :</h1>
+    <div>
+        <h1 class="spo2_value0"
+            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">Sensor :
+        </h1>
+
+        <h1 class="spo2_value1"
+            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">Sensor :
+        </h1>
+        <hr style="clear:both;" />
+
     </div>
     <br>
+    <div>
+        <h1 class="hr_value0"
+            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">Sensor :
+        </h1>
+        <h1 class="hr_value1"
+            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">Sensor :
+        </h1>
+        <hr style="clear:both;" />
+
+    </div>
+    <br>
+
     <!--<div class="jumbotron" style="background-color: #889EEA ; text-align:center">
     </div>
     <div class="container-fluid"> -->
@@ -142,11 +150,11 @@
                         charthr.series[i].addPoint(data1, true, shifthr);
                         chartspo2.series[i].addPoint(data2, true, shiftspo2);
                         charttemp.series[i].addPoint(data3, true, shifttemp);
-                        $(`.temp_value${i}`).text("temperature value : " + (data3[1]));
+                        $(`.temp_value${i}`).text(`Temp. of person ${parseInt(i) + 1} : ` + (data3[1]));
 
-                        $(`.spo2_value${i}`).text("spo2 value: " + (data2[1]));
+                        $(`.spo2_value${i}`).text(`SPO2 of person ${parseInt(i) + 1} : ` + (data2[1]));
 
-                        $(`.hr_value${i}`).text("Heart rate value : " + (data1[1]));
+                        $(`.hr_value${i}`).text(`Heart rate of person ${parseInt(i) + 1} : ` + (data1[1]));
                     }
 
 
@@ -198,7 +206,7 @@
                 },
 
                 series: [{
-                    name: 'mb3',
+                    name: 'Heartrate 1',
                     data: [],
                     zones: [{
                         value: 60,
@@ -213,7 +221,7 @@
 
                 },
                 {
-                    name: 'mb4',
+                    name: 'Heartrate 2',
                     data: [],
                     zones: [{
                         value: 60,
