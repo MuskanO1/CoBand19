@@ -47,65 +47,31 @@
             height: 25%;
         }
     </style>
-    <img src="https://raw.githubusercontent.com/jxtin/CoBand19/main/v1/templates/main_icon.png" alt="Icon">
-    <br>
-    <div>
-        <h1 class="temp_value0"
-            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">
-            Sensor : </h1>
-        <h1 class="temp_value1"
-            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">
-            Sensor : </h1>
-        <hr style="clear:both;" />
+    <img src="https://raw.githubusercontent.com/jxtin/CoBand19/main/templates/main_icon.png" alt="Icon">
 
-    </div>
-    <br>
-    <div>
-        <h1 class="spo2_value0"
-            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">Sensor :
-        </h1>
-
-        <h1 class="spo2_value1"
-            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">Sensor :
-        </h1>
-        <hr style="clear:both;" />
-
-    </div>
-    <br>
-    <div>
-        <h1 class="hr_value0"
-            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">Sensor :
-        </h1>
-        <h1 class="hr_value1"
-            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">Sensor :
-        </h1>
-        <hr style="clear:both;" />
-
-    </div>
-    <br>
 
     <!--<div class="jumbotron" style="background-color: #889EEA ; text-align:center">
     </div>
     <div class="container-fluid"> -->
     <!-- Example row of columns -->
-
     <div class="row">
-        <div class="container-fluid" id="data-hr">
+        <div class="container-fluid" id="data-container">
+
         </div>
+    </div>
+    </div>
+
+    <div
+        style="background-color: white ; text-align:center; margin-top: 50px; margin-left: 700px; width: 500px; border-radius: 1000px;">
+        <h1 class="mb3"> Sensor : </h1>
     </div>
     <br>
-    <div class="row">
-        <div class="container-fluid" id="data-spo2">
-        </div>
+
+    <div
+        style="background-color: white ; text-align:center; margin-top: 0px; margin-left: 700px; width: 500px; border-radius: 1000px;">
+        <h1 class="mb4">Sensor :</h1>
     </div>
     <br>
-    <div class="row">
-        <div class="container-fluid" id="data-temp">
-        </div>
-    </div>
-
-
-
 
 
     <script>
@@ -116,69 +82,78 @@
                 timezoneOffset: timezone
             }
         });
-        var charthr;
-        var chartspo2;
+
+
 
         function requestData() {
             // Ajax call to get the Data from Flask
-            var requests = $.get('/data');
+            try {
+                var requests = $.get('/data');
+                console.log(requests);
+                var tm = requests.done(function (result) {
+                    var series = chart.series[0],
+                        shift = series.data.length > 20;
+                    var series1 = chart.series[1],
+                        shift1 = series1.data.length > 20;
 
-            var tm = requests.done(function (result) {
-                console.log(result);
-                // console.log(result[0]);
-                // console.log(result[1]);
-                console.log(Object.keys(result).length);
-                if (result != ["No more data"]) {
-                    var serieshr = charthr.series[0],
-                        shifthr = serieshr.data.length > 20;
+                    // add the point
+                    try {
 
-                    // spo2
-                    var seriesspo2 = chartspo2.series[0],
-                        shiftspo2 = seriesspo2.data.length > 20;
 
-                    var seriestemp = charttemp.series[0],
-                        shifttemp = seriestemp.data.length > 20;
-
-                    // Add the Point
-                    // Time hr
-                    for (i in result) {
-                        var data1 = [result[i]["_id"], result[i]["hr_value"]];
-
-                        var data2 = [result[i]["_id"], result[i]["spo2_value"]];
-
-                        var data3 = [result[i]["_id"], result[i]["temperature_value"]];
-                        charthr.series[i].addPoint(data1, true, shifthr);
-                        chartspo2.series[i].addPoint(data2, true, shiftspo2);
-                        charttemp.series[i].addPoint(data3, true, shifttemp);
-                        $(`.temp_value${i}`).text(`Temp. of person ${parseInt(i) + 1} : ` + (data3[1]));
-
-                        $(`.spo2_value${i}`).text(`SPO2 of person ${parseInt(i) + 1} : ` + (data2[1]));
-
-                        $(`.hr_value${i}`).text(`Heart rate of person ${parseInt(i) + 1} : ` + (data1[1]));
+                        if (typeof result["mb3"] !== 'undefined') {
+                            console.log("result[mb3]", result["mb3"]);
+                            chart.series[0].addPoint(result["mb3"], true, shift);
+                            $(".mb3").text("Muskan's Heart Rate is : " + Math.round(result["mb3"][1]))
+                            if (result["mb3"][1] > 110) {
+                                $(".mb3").css("color", "red");
+                            } else {
+                                $(".mb3").css("color", "black");
+                            }
+                        }
+                        else {
+                            console.log("No Data for mb3")
+                        }
                     }
+                    catch (error) {
+                        console.log(error);
+                    }
+                    try {
 
 
-                    // charthr.series[0].addPoint(data1, true, shifthr);
-                    // chartspo2.series[0].addPoint(data2, true, shiftspo2);
-                    // charttemp.series[0].addPoint(data3, true, shifttemp);
-                    // charthr.series[1].addPoint(data1, true, shifthr);
-                    // chartspo2.series[1].addPoint(data2, true, shiftspo2);
-                    // charttemp.series[1].addPoint(data3, true, shifttemp);
+                        if (typeof result["mb4"] !== 'undefined') {
+                            console.log("result[mb4]", result["mb4"]);
+                            chart.series[1].addPoint(result["mb4"], true, shift);
+                            $(".mb4").text("Jatin's Heart Rate is : " + Math.round(result["mb4"][1]))
+                            if (result["mb4"][1] > 110) {
+                                $(".mb4").css("color", "red");
+                            } else {
+                                $(".mb4").css("color", "black");
+                            }
+                        }
+                        else {
+                            console.log("No Data for mb4")
+                        }
+                    }
+                    catch (error) {
+                        console.log(error);
 
-                }
-                // call it again after few seconds
-                setTimeout(requestData, 5000);
+                    }
+                    // call it again after few seconds
+                    setTimeout(requestData, 4000);
 
-            });
+                });
+            }
+            catch (error) {
+                console.log(error);
+                console.log("Ran out of data, will try calling again")
+                setTimeout(requestData, 4000);
+            }
         }
-
         $(document).ready(function () {
-            // --------------Chart 1 ----------------------------
-            charthr = new Highcharts.Chart({
-                chart:
-                {
-                    renderTo: 'data-hr',
-                    defaultSeriesType: 'spline',
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'data-container',
+                    defaultSeriesType: 'spline', // change the type to spline, line, area
                     events: {
                         load: requestData
                     }
@@ -206,7 +181,7 @@
                 },
 
                 series: [{
-                    name: 'Heartrate 1',
+                    name: 'mb3',
                     data: [],
                     zones: [{
                         value: 60,
@@ -221,7 +196,7 @@
 
                 },
                 {
-                    name: 'Heartrate 2',
+                    name: 'mb4',
                     data: [],
                     zones: [{
                         value: 60,
@@ -235,102 +210,12 @@
                     ]
                 }
 
-                ],
-            });
-            // --------------Chart 1 Ends - -----------------
 
-            chartspo2 = new Highcharts.Chart({
-                chart:
-                {
-                    renderTo: 'data-spo2',
-                    defaultSeriesType: 'spline',
-                    events: {
-                        load: requestData
-                    }
-                },
-                title:
-                {
-                    text: 'spo2'
-                },
-                xAxis: {
-                    type: 'datetime',
-                    tickPixelInterval: 150,
-                    maxZoom: 20 * 1000
-                },
-                yAxis: {
-                    minPadding: 0.2,
-                    maxPadding: 0.2,
-                    title: {
-                        text: 'Value',
-                        margin: 80
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        threshold: 85
-                    }
-                },
 
-                series: [{
-                    lineColor: '#1d82b8',
-                    name: 'spo2 1',
-                    data: []
-                },
-                {
-                    lineColor: '#1d82b8',
-                    name: 'spo2 2',
-                    data: []
-                }]
-
-            });
-            // --------------Chart 2 Ends - -----------------
-
-            charttemp = new Highcharts.Chart({
-                chart:
-                {
-                    renderTo: 'data-temp',
-                    defaultSeriesType: 'spline',
-                    events: {
-                        load: requestData
-                    }
-                },
-                title:
-                {
-                    text: 'temperature'
-                },
-                xAxis: {
-                    type: 'datetime',
-                    tickPixelInterval: 150,
-                    maxZoom: 20 * 1000
-                },
-                yAxis: {
-                    minPadding: 0.2,
-                    maxPadding: 0.2,
-                    title: {
-                        text: 'Value',
-                        margin: 80
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        threshold: 95
-                    }
-                },
-
-                series: [{
-                    lineColor: '#1d82b8',
-                    name: 'temperature 1',
-                    data: []
-                },
-                {
-                    lineColor: '#1d82b8',
-                    name: 'temperature 2',
-                    data: []
-                }]
+                ]
             });
 
         });
-
     </script>
 </body>
 

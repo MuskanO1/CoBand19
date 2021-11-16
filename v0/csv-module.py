@@ -1,6 +1,3 @@
-"""File logs data from mi band into a csv, obselete after the cloudant integration"""
-
-
 import time
 from datetime import datetime
 from bluepy.btle import BTLEDisconnectError
@@ -11,7 +8,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# All necessary imports
 
 SERVICE_URL = os.getenv("SERVICE_URL")
 API_KEY = os.getenv("API_KEY")
@@ -20,8 +16,6 @@ MAC_ADDR = os.getenv("MAC_ADDR")
 
 AUTH_KEY = bytes.fromhex(AUTH_KEY)
 alternate = True
-
-# All private keys from the .env file
 
 
 def general_info():
