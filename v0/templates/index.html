@@ -91,14 +91,12 @@
                     chart.series[0].addPoint(result, true, shift);
                     console.log(result);
                     if (result[1] > 120) {
-                        // alert("WTF?")
+                        //alert("High Heart")
                         console.log("Dard")
-                        Highcharts.setOptions({
-                            series: {
-                                lineColor: "#1d82b8"
-                            }
-                        });
-
+                        $(".HeartRate").css("background-color", "red");
+                    }
+                    else {
+                        $(".HeartRate").css("background-color", "white");
                     }
                     $(".HeartRate").text("Heart Rate is : " + Math.round(result[1]))
                     // call it again after few seconds

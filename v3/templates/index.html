@@ -49,42 +49,22 @@
     </style>
     <img src="https://raw.githubusercontent.com/jxtin/CoBand19/main/v1/templates/main_icon.png" alt="Icon">
     <br>
-    <div>
-        <h1 class="temp_value0"
-            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">
-            Sensor : </h1>
-        <h1 class="temp_value1"
-            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">
-            Sensor : </h1>
-        <hr style="clear:both;" />
-
+    <div
+        style="background-color: white ; text-align:center; margin-top: 50px; margin-left: 700px; width: 500px; border-radius: 1000px;">
+        <h1 class="temp_value0"> Sensor : </h1>
     </div>
-    <br>
-    <div>
-        <h1 class="spo2_value0"
-            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">Sensor :
-        </h1>
-
-        <h1 class="spo2_value1"
-            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">Sensor :
-        </h1>
-        <hr style="clear:both;" />
-
+    <!-- <div
+        style="background-color: white ; text-align:center; margin-top: 50px; margin-left: 700px; width: 500px; border-radius: 1000px;">
+        <h1 class="spo2_value0"> Sensor : </h1>
+    </div> -->
+    <div
+        style="background-color: white ; text-align:center; margin-top: 50px; margin-left: 700px; width: 500px; border-radius: 1000px;">
+        <h1 class="hr_value0"> Sensor : </h1>
     </div>
-    <br>
-    <div>
-        <h1 class="hr_value0"
-            style=" background-color: white ;float:left;border-radius: 1000px;margin-left: 350px;width: 500px">Sensor :
-        </h1>
-        <h1 class="hr_value1"
-            style="background-color: white ;float:right;border-radius: 1000px;margin-right: 350px;width: 500px">Sensor :
-        </h1>
-        <hr style="clear:both;" />
 
-    </div>
     <br>
 
-    <!--<div class="jumbotron" style="background-color: #889EEA ; text-align:center">
+    <!--<div class=" jumbotron" style="background-color: #889EEA ; text-align:center">
     </div>
     <div class="container-fluid"> -->
     <!-- Example row of columns -->
@@ -133,8 +113,8 @@
                         shifthr = serieshr.data.length > 20;
 
                     // spo2
-                    var seriesspo2 = chartspo2.series[0],
-                        shiftspo2 = seriesspo2.data.length > 20;
+                    // var seriesspo2 = chartspo2.series[0],
+                    //     shiftspo2 = seriesspo2.data.length > 20;
 
                     var seriestemp = charttemp.series[0],
                         shifttemp = seriestemp.data.length > 20;
@@ -144,38 +124,29 @@
                     for (i in result) {
                         var data1 = [result[i]["_id"], result[i]["hr_value"]];
 
-                        var data2 = [result[i]["_id"], result[i]["spo2_value"]];
+                        // var data2 = [result[i]["_id"], result[i]["spo2_value"]];
 
                         var data3 = [result[i]["_id"], result[i]["temperature_value"]];
                         charthr.series[i].addPoint(data1, true, shifthr);
-                        chartspo2.series[i].addPoint(data2, true, shiftspo2);
+                        // chartspo2.series[i].addPoint(data2, true, shiftspo2);
                         charttemp.series[i].addPoint(data3, true, shifttemp);
                         $(`.temp_value${i}`).text(`Temp. of person ${parseInt(i) + 1} : ` + (data3[1]));
 
-                        $(`.spo2_value${i}`).text(`SPO2 of person ${parseInt(i) + 1} : ` + (data2[1]));
+                        // $(`.spo2_value${i}`).text(`SPO2 of person ${parseInt(i) + 1} : ` + (data2[1]));
 
                         $(`.hr_value${i}`).text(`Heart rate of person ${parseInt(i) + 1} : ` + (data1[1]));
 
-                        if (data3[1] > 100) {
-                            $(`.temp_value${i}`).css("color", "red");
-                            window.alert(`Temperature is too high for person ${parseInt(i) + 1}`);
-                        }
-                        else {
-                            $(`.temp_value${i}`).css("color", "green");
-                        }
-
-                        if (data2[1] < 95) {
-                            $(`.spo2_value${i}`).css("color", "red");
-                            window.alert(`SPO2 is low for person ${parseInt(i) + 1}`);
-                        } else {
-                            $(`.spo2_value${i}`).css("color", "green");
-                        }
                         if (data1[1] > 120) {
                             $(`.hr_value${i}`).css("color", "red");
                         } else {
                             $(`.hr_value${i}`).css("color", "green");
                         }
 
+                        if (data3[1] > 100) {
+                            $(`.temp_value${i}`).css("color", "red");
+                        } else {
+                            $(`.temp_value${i}`).css("color", "green");
+                        }
                     }
 
 
@@ -241,84 +212,69 @@
                     ]
 
                 },
-                {
-                    name: 'Heartrate 2',
-                    data: [],
-                    zones: [{
-                        value: 60,
-                        color: '#7cb5ec'
-                    }, {
-                        value: 115,
-                        color: '#86f77e'
-                    }, {
-                        color: '#FC8F78'
-                    }
-                    ]
-                }
+                    // {
+                    //     name: 'Heartrate 2',
+                    //     data: [],
+                    //     zones: [{
+                    //         value: 60,
+                    //         color: '#7cb5ec'
+                    //     }, {
+                    //         value: 115,
+                    //         color: '#86f77e'
+                    //     }, {
+                    //         color: '#FC8F78'
+                    //     }
+                    //     ]
+                    // }
 
                 ],
             });
             // --------------Chart 1 Ends - -----------------
 
-            chartspo2 = new Highcharts.Chart({
-                chart:
-                {
-                    renderTo: 'data-spo2',
-                    defaultSeriesType: 'spline',
-                    events: {
-                        load: requestData
-                    }
-                },
-                title:
-                {
-                    text: 'spo2'
-                },
-                xAxis: {
-                    type: 'datetime',
-                    tickPixelInterval: 150,
-                    maxZoom: 20 * 1000
-                },
-                yAxis: {
-                    minPadding: 0.2,
-                    maxPadding: 0.2,
-                    title: {
-                        text: 'Value',
-                        margin: 80
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        threshold: 85
-                    }
-                },
+            // chartspo2 = new Highcharts.Chart({
+            //     chart:
+            //     {
+            //         renderTo: 'data-spo2',
+            //         defaultSeriesType: 'spline',
+            //         events: {
+            //             load: requestData
+            //         }
+            //     },
+            //     title:
+            //     {
+            //         text: 'spo2'
+            //     },
+            //     xAxis: {
+            //         type: 'datetime',
+            //         tickPixelInterval: 150,
+            //         maxZoom: 20 * 1000
+            //     },
+            //     yAxis: {
+            //         minPadding: 0.2,
+            //         maxPadding: 0.2,
+            //         title: {
+            //             text: 'Value',
+            //             margin: 80
+            //         }
+            //     },
+            //     plotOptions: {
+            //         series: {
+            //             threshold: 85
+            //         }
+            //     },
 
-                series: [{
-                    lineColor: '#1d82b8',
-                    name: 'spo2 1',
-                    data: [],
-                    zones: [{
-                        value: 95,
-                        color: '#FC8F78'
-                    }, {
-                        value: 100,
-                        color: '#86f77e'
-                    }]
+            //     series: [{
+            //         lineColor: '#1d82b8',
+            //         name: 'spo2 1',
+            //         data: []
+            //     },
+            //     {
+            //         lineColor: '#1d82b8',
+            //         name: 'spo2 2',
+            //         data: []
+            //     }]
 
-                },
-                {
-                    lineColor: '#1d82b8',
-                    name: 'spo2 2',
-                    data: [],
-                    zones: [{
-                        value: 95,
-                        color: '#FC8F78'
-                    }, {
-                        value: 100,
-                        color: '#86f77e'
-                    }]
-                }]
-
-            });
+            // });
             // --------------Chart 2 Ends - -----------------
 
             charttemp = new Highcharts.Chart({
@@ -368,23 +324,16 @@
                     }
                     ]
 
-                },
-                {
-                    lineColor: '#1d82b8',
-                    name: 'temperature 2',
-                    data: [],
-                    zones: [{
-                        value: 97,
-                        color: '#7cb5ec'
-                    }, {
-                        value: 100,
-                        color: '#86f77e'
-                    }, {
-                        color: '#FC8F78'
-                    }
-                    ]
 
-                }]
+
+
+                },
+                    // {
+                    //     lineColor: '#1d82b8',
+                    //     name: 'temperature 2',
+                    //     data: []
+                    // }
+                ]
             });
 
         });
