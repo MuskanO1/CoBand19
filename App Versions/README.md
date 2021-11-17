@@ -22,3 +22,37 @@ cd coband_vx
 flutter build apk
 ```
 
+
+## Logins for each app version
+
+
+### Version 0
+```
+username: coband
+password: password
+```
+### Version 1
+```
+username: muskan
+password: password
+```
+OR
+```
+username: jxtin
+password: password
+```
+### Version 2
+```
+username: jatin
+password: wontreveal
+```
+### Version 3
+```
+username: v3
+password: password
+```
+### Version 4
+```
+username: v4
+password: password
+```
